@@ -12,7 +12,7 @@
             <div class="page-title-box">
                 <div class="row">
                     <div class="col">
-                        <h4 class="page-title">New User</h4>
+                        <h4 class="page-title">{{ __('auth.newUser') }}</h4>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                             <div class="col-lg-10">
                                 <div class="mb-3 row">
                                     <label for="name"
-                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">Name</label>
+                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('auth.name') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('name') parsley-error @enderror" name="name" type="text" value="" id="name">
                                         @error('name')
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="email-input" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">Email</label>
+                                    <label for="email-input" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('auth.email') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('email') parsley-error @enderror" name="email" type="email" value="" id="email">
                                         @error('email')
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="mobile"
-                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">Mobile Nubmer</label>
+                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('auth.mobileNo') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('mobile_number') parsley-error @enderror" name="mobile_number" type="tel" value="" id="mobile">
                                         @error('mobile_number')
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="password"
-                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">Password</label>
+                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('auth.password') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('password') parsley-error @enderror" name="password" type="password" value="" id="password">
                                         @error('password')
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="repassword"
-                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">Password</label>
+                                        class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('auth.repassword') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('repassword') parsley-error @enderror" name="repassword" type="password" value="" id="repassword">
                                         @error('repassword')
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="role" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">Role</label>
+                                    <label for="role" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('auth.role') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 mb-3 select2-multiple @error('roles[]') parsley-error @enderror" name="roles[]" id="role"
                                             style="width: 100%" multiple="multiple" data-placeholder="Choose">
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="photo"class="col-sm-2 form-label align-self-center mb-lg-0 text-end">Photo</label>
+                                    <label for="photo"class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('auth.photo') }}</label>
                                     <div class="col-sm-10">
                                         <input type="file" name="photo" class="form-control @error('photo') parsley-error @enderror" id="photo">
                                         @error('photo')
@@ -106,8 +106,8 @@
 
                                 <div class="mb-3 row">
                                     <div class="offset-sm-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('users') }}" class="btn btn-danger">Cancel</a>
+                                        <button type="submit" class="btn btn-primary">{{ __('master.submit') }}</button>
+                                        <a href="{{ route('users') }}" class="btn btn-danger">{{ __('master.cancel') }}</a>
                                     </div>
                                 </div>
                             </div>

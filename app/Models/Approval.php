@@ -24,4 +24,12 @@ class Approval extends Model
     {
         return $this->belongsTo(Job_title::class, 'job_title_id');
     }
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function modifier()
+    {
+        return $this->belongsTo(User::class, 'modified_by');
+    }
 }

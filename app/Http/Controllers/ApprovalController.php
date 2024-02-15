@@ -104,7 +104,11 @@ class ApprovalController extends Controller
 
     public function delete($id){
         $approval = Approval::find($id);
-        $approval->delete();
+        try {
+            $approval->delete();
+        } catch (\Throwable $th) {
+            return redirect()->back->with('error', 'Cannot Delete this item please contact system admin!');
+        }
         return redirect()->route('approval')->with('success', 'User deleted successfully! ');
     }
 

@@ -2,7 +2,7 @@
     <!-- Navbar -->
     <nav class="navbar-custom">
         <ul class="list-unstyled topbar-nav float-end mb-0">
-            <li class="dropdown hide-phone">
+            {{-- <li class="dropdown hide-phone">
                 <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
                     aria-haspopup="false" aria-expanded="false">
                     <i data-feather="search" class="topbar-icon"></i>
@@ -17,7 +17,7 @@
                         </form>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-sm text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                     <span class="fi fi-{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}"></span>
@@ -128,10 +128,10 @@
                     <img src="{{ (isset(Auth::user()->avatar) && Auth::user()->avatar != '')  ? asset(Auth::user()->avatar) : asset('/assets/images/users/user-1.jpg') }}" alt="profile-user" class="rounded-circle thumb-xs" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="/pages-profile"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> Profile</a>
-                    <a class="dropdown-item" href="#"><i data-feather="settings" class="align-self-center icon-xs icon-dual me-1"></i> Settings</a>
+                    <a class="dropdown-item" href="/pages-profile"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i>{{ __('auth.profile') }}</a>
+                    <a class="dropdown-item" href="#"><i data-feather="settings" class="align-self-center icon-xs icon-dual me-1"></i> {{ __('auth.settings') }}</a>
                     <div class="dropdown-divider mb-0"></div>
-                    <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="power" class="align-self-center icon-xs icon-dual me-1"></i> <span key="t-logout">Logout</span></a>
+                    <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="power" class="align-self-center icon-xs icon-dual me-1"></i> <span key="t-logout">{{ __('auth.logout') }}</span></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>

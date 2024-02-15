@@ -9,11 +9,11 @@
         <div class="row navbar-custom">
             <ul class="list-unstyled topbar-nav mb-0">
                 <li>
-                    <h3>Users</h3>
+                    <h3>{{ __('master.users') }}</h3>
                 </li>
                 <li class="creat-btn">
                     <div class="nav-link">
-                        <a class=" btn btn-sm btn-soft-primary" href="{{ route('user_add') }}" role="button"><i class="fas fa-plus me-2"></i>New User</a>
+                        <a class=" btn btn-sm btn-soft-primary" href="{{ route('user_add') }}" role="button"><i class="fas fa-plus me-2"></i>{{ __('auth.newUser') }}</a>
                     </div>
                 </li>
             </ul>
@@ -25,12 +25,12 @@
                     <table id="datatable" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile Number</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>{{ __('auth.name') }}</th>
+                            <th>{{ __('auth.email') }}</th>
+                            <th>{{ __('auth.mobileNo') }}</th>
+                            <th>{{ __('auth.role') }}</th>
+                            <th>{{ __('auth.status') }}</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,7 @@
                                 </td>
                                 <td><span class="badge badge-soft-warning">status </span></td>
                                 <td>
-                                    <a href="{{ route('user_edit', $user->id) }}"><i data-feather="info" class="text-primary"></i></a>
+                                    <a href="{{ route('user', $user->id) }}"><i data-feather="info" class="text-primary"></i></a>
                                     <a href="{{ route('user_edit', $user->id) }}"><i data-feather="edit" class="text-success"></i></a>
                                     <a href="{{ route('user_delete', $user->id) }}"><i data-feather="trash" class="icon-dual text-danger"></i></a>
                                 </td>

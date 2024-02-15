@@ -9,11 +9,11 @@
         <div class="row navbar-custom">
             <ul class="list-unstyled topbar-nav mb-0">
                 <li>
-                    <h3>Approvals</h3>
+                    <h3>{{ __('approvals.approvals') }}</h3>
                 </li>
                 <li class="creat-btn">
                     <div class="nav-link">
-                        <a class=" btn btn-sm btn-soft-primary" href="{{ route('approval_add') }}" role="button"><i class="fas fa-plus me-2"></i>New Approval</a>
+                        <a class=" btn btn-sm btn-soft-primary" href="{{ route('approval_add') }}" role="button"><i class="fas fa-plus me-2"></i>{{ __('approvals.newApproval') }}</a>
                     </div>
                 </li>
             </ul>
@@ -25,17 +25,17 @@
                     <table id="datatable" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>VP Number</th>
-                            <th>Request No.</th>
-                            <th>Company</th>
-                            <th>Issue Date Id</th>
-                            <th>Expire Date</th>
-                            <th>Nationality</th>
-                            <th>Gender</th>
-                            <th>Job</th>
-                            <th>Total</th>
-                            <th>Consumed</th>
-                            <th>Action</th>
+                            <th>{{ __('approvals.vpNo') }}</th>
+                            <th>{{ __('approvals.reqNo') }}</th>
+                            <th>{{ __('approvals.company') }}</th>
+                            <th>{{ __('approvals.issueOn') }}</th>
+                            <th>{{ __('approvals.expireOn') }}</th>
+                            <th>{{ __('approvals.nationality') }}</th>
+                            <th>{{ __('approvals.gender') }}</th>
+                            <th>{{ __('approvals.jobTitle') }}</th>
+                            <th>{{ __('approvals.total') }}</th>
+                            <th>{{ __('approvals.consumed') }}</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,12 +43,12 @@
                             <tr>
                                 <td>{{ $approval->vp_no }}</td>
                                 <td>{{ $approval->req_no }}</td>
-                                <td>{{ $approval->company->company_name }}</td>
+                                <td>{{ App::getLocale() == 'ar' ? $approval->company->company_name_ar : $approval->company->company_name }}</td>
                                 <td>{{ $approval->issue_date }}</td>
                                 <td>{{ $approval->expire_date }}</td>
-                                <td>{{ $approval->nationality->name }}</td>
+                                <td>{{ App::getLocale() == 'ar' ? $approval->nationality->name_ar : $approval->nationality->name }}</td>
                                 <td>{{ $approval->gender }}</td>
-                                <td>{{ $approval->job_title->name }}</td>
+                                <td>{{ App::getLocale() == 'ar' ? $approval->job_title->name_ar : $approval->job_title->name }}</td>
                                 <td>{{ $approval->total }}</td>
                                 <td>{{ $approval->consumed }}</td>
 

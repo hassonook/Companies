@@ -10,6 +10,20 @@ Template Name: Dastone - Admin & Dashboard Template
 Author: Mannatthemes
 File: Leftbar
 */
+
+.dl-horizontal dt {
+  float: right;
+  margin-left: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold; /* Make terms bold */
+}
+.dl-horizontal dd:empty::after {
+  content: "\A"; /* Insert a line break */
+  white-space: pre; /* Preserve line breaks */
+}
+
 .left-sidenav {
   min-width: 230px;
   max-width: 230px;

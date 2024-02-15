@@ -112,4 +112,16 @@ return [
 
     'password_timeout' => 10800,
 
+
+    /*
+    |----------------------------------------------------------------------------
+    |Default Password
+    |----------------------------------------------------------------------------
+    |
+    |This password used when reset password by Super Admin
+    |
+    */
+
+    'default_password' => '123456',
+
 ];

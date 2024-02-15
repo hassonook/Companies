@@ -19,6 +19,10 @@ File: Leftbar
   white-space: nowrap;
   font-weight: bold; /* Make terms bold */
 }
+.dl-horizontal dd:empty::after {
+  content: "\A"; /* Insert a line break */
+  white-space: pre; /* Preserve line breaks */
+}
 
 .left-sidenav {
   min-width: 230px;

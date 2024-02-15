@@ -32,7 +32,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.companyName') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('company_name') parsley-error @enderror"
-                                            name="company_name" type="text" value="" id="company_name">
+                                            name="company_name" type="text" value="{{ old('company_name') }}" id="company_name">
                                         @error('company_name')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -43,7 +43,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.companyNameAr') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('company_name_ar') parsley-error @enderror"
-                                            name="company_name_ar" type="text" value="" id="company_name_ar">
+                                            name="company_name_ar" type="text" value="{{ old('company_name_ar') }}" id="company_name_ar">
                                         @error('company_name_ar')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -66,7 +66,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.ownerId') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('owner_id') parsley-error @enderror"
-                                            name="owner_id" type="text" value="" id="owner_id">
+                                            name="owner_id" type="text" value="{{ old('owner_id') }}" id="owner_id">
                                         @error('owner_id')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -77,7 +77,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.ownerPhone') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('owner_phone') parsley-error @enderror"
-                                            name="owner_phone" type="text" value="" id="owner_phone">
+                                            name="owner_phone" type="text" value="{{ old('owner_phone') }}" id="owner_phone">
                                         @error('owner_phone')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -88,7 +88,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.estId') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('registration_id') parsley-error @enderror"
-                                            name="registration_id" type="text" value="" id="registration_id">
+                                            name="registration_id" type="text" value="{{ old('registration_id') }}" id="registration_id">
                                         @error('registration_id')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -98,7 +98,7 @@
                                     <label for="reg_issue_date"
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.estIssueDate') }}</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control @error('reg_issue_date') parsley-error @enderror" name="reg_issue_date" type="date" value="" id="reg_issue_date">
+                                        <input class="form-control @error('reg_issue_date') parsley-error @enderror" name="reg_issue_date" type="date" value="{{ old('reg_issue_date') }}" id="reg_issue_date">
                                         @error('reg_issue_date')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -109,7 +109,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.estExpireDate') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('reg_expire_date') parsley-error @enderror"
-                                            name="reg_expire_date" type="date" value="" id="reg_expire_date">
+                                            name="reg_expire_date" type="date" value="{{ old('reg_expire_date') }}" id="reg_expire_date">
                                         @error('reg_expire_date')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -131,7 +131,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.comId') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('commercial_id') parsley-error @enderror"
-                                            name="commercial_id" type="text" value="" id="commercial_id">
+                                            name="commercial_id" type="text" value="{{ old('commercial_id') }}" id="commercial_id">
                                         @error('commercial_id')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -142,7 +142,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.comIssueDate') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('com_issue_date') parsley-error @enderror"
-                                            name="com_issue_date" type="date" value="" id="com_issue_date">
+                                            name="com_issue_date" type="date" value="{{ old('com_issue_date') }}" id="com_issue_date">
                                         @error('com_issue_date')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -153,7 +153,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.comExpireDate') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('com_expire_date') parsley-error @enderror"
-                                            name="com_expire_date" type="date" value="" id="com_expire_date">
+                                            name="com_expire_date" type="date" value="{{ old('com_expire_date') }}" id="com_expire_date">
                                         @error('com_expire_date')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -176,7 +176,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.licNo') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('license_no') parsley-error @enderror"
-                                            name="license_no" type="text" value="" id="license_no">
+                                            name="license_no" type="text" value="{{ old('license_no') }}" id="license_no">
                                         @error('license_no')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -187,7 +187,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.licIssueDate') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('lic_issue_date') parsley-error @enderror"
-                                            name="lic_issue_date" type="date" value="" id="lic_issue_date">
+                                            name="lic_issue_date" type="date" value="{{ old('lic_issue_date') }}" id="lic_issue_date">
                                         @error('lic_issue_date')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -198,7 +198,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.licExpireDate') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('lic_expire_date') parsley-error @enderror"
-                                            name="lic_expire_date" type="date" value="" id="lic_expire_date">
+                                            name="lic_expire_date" type="date" value="{{ old('lic_expire_date') }}" id="lic_expire_date">
                                         @error('lic_expire_date')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -237,7 +237,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.companyBusiness') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('business') parsley-error @enderror"
-                                            name="business" type="text" value="" id="business">
+                                            name="business" type="text" value="{{ old('business') }}" id="business">
                                         @error('business')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -248,7 +248,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.address') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('company_address') parsley-error @enderror"
-                                            name="company_address" type="text" value="" id="company_address">
+                                            name="company_address" type="text" value="{{ old('company_address') }}" id="company_address">
                                         @error('company_address')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -259,7 +259,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.telephone') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('telephone') parsley-error @enderror"
-                                            name="telephone" type="tel" value="" id="telephone">
+                                            name="telephone" type="tel" value="{{ old('telephone') }}" id="telephone">
                                         @error('telephone')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -270,7 +270,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.email') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('email') parsley-error @enderror"
-                                            name="email" type="email" value="" id="email">
+                                            name="email" type="email" value="{{ old('email') }}" id="email">
                                         @error('email')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -281,7 +281,7 @@
                                         class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.website') }}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('website') parsley-error @enderror"
-                                            name="website" type="url" value="" id="website">
+                                            name="website" type="url" value="{{ old('website') }}" id="website">
                                         @error('website')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror

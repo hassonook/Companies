@@ -23,7 +23,7 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login-submit', [UserController::class, 'login_submit'])->name('login_submit');
 Route::get('/forget-password', [UserController::class, 'forget_password'])->name('forget_password');
 Route::post('/forget-password-submit', [UserController::class, 'forget_password_submit'])->name('forget_password_submit');
-Route::get('/reset-password', [UserController::class, 'reset_password'])->name('reset_password');
+Route::get('/reset-password/{token}/{email}', [UserController::class, 'reset_password'])->name('reset_password');
 Route::post('/reset-password-submit', [UserController::class, 'reset_password_submit'])->name('reset_password_submit');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -67,6 +67,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/approval-delete/{id}', [ApprovalController::class, 'delete'])->name('approval_delete');
     
     Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/user/{id}', [UserController::class, 'details'])->name('user');
     Route::get('/user-add', [UserController::class, 'add'])->name('user_add');
     Route::post('/user-store', [UserController::class, 'store'])->name('user_store');
     Route::get('/user-edit/{id}', [UserController::class, 'edit'])->name('user_edit');

@@ -1,0 +1,16 @@
+<?php return [
+    'approvals' => "Approvals",
+    'newApproval' => "New Approval",
+    'approvalDetails' => "Approval Details",
+    'approvalEdit' => "Approval Edit",
+    'company' => "Company",
+    'vpNo' => "VP No.",
+    'reqNo' => "Request No.",
+    'issueOn' => "Issue On",
+    'expireOn' => "Expire On",
+    'nationality' => "Nationality",
+    'jobTitle' => "Job Title",
+    'gender' => "Gender",
+    'total' => "Total",
+    'consumed' => "Consumed",
+];

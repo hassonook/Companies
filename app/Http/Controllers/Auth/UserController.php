@@ -18,6 +18,11 @@ class UserController extends Controller
         $users = User::with('roles')->get();
         return view('user.list', compact('users'));
     }
+
+    public function details($id){
+        $user = User::find($id);
+        return view('user.details', compact('user'));
+    }
     
     public function add(){
         $roles = Role::get();
@@ -30,8 +35,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|same:password',
-            'repassword' => 'required|same:repassword',
-            'roles[]' => 'required'
+            'repassword' => 'same:password',
+            'roles' => 'required'
         ]);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -41,13 +46,9 @@ class UserController extends Controller
             $request->validate([
                 'photo' => 'image|mimes:jpg,jpeg,png,gif'
             ]);
-               // unlink(public_path('uploads/userPhoto/'.$admin_data->photo));
-
             $ext = $request->file('photo')->extension();
             $final_name =  strstr($request->email, '@', true).'.'.$ext;
-
             $request->file('photo')->move(public_path('uploads/userPhoto/'),$final_name);
-
             $user->photo = $final_name;
         }
         if ($request->mobile_number != '') {
@@ -76,7 +77,7 @@ class UserController extends Controller
         if(Auth::attempt($credential)){
             return redirect()->route('home');
         }else{
-            return redirect()->route('login')->with('error', 'incorrect login info');
+            return redirect()->route('login')->with('error', trans('message.incorrectLogin'));
         }
     }
 
@@ -85,45 +86,48 @@ class UserController extends Controller
     }
 
     public function forget_password_submit(Request $request){
+       
         $request->validate([
             'email'=> 'required|email',
         ]);
-        $admin_data = Admin::where('email', $request->email)->first();
-        if (!$admin_data) {
+        $user_data = User::where('email', $request->email)->first();
+        
+        if (!$user_data) {
+            dd('here');
             return redirect()->back()->with('error', 'Email Address not found!');
         }
 
         $token = hash('sha256', time());
 
-        $admin_data->token = $token;
-        $admin_data->update();
-        $reset_link = url('admin/reset-password/'.$token.'/'.$request->email);
+        $user_data->remember_token = $token;
+        $user_data->update();
+        $link = url('user/reset-password/'.$token.'/'.$request->email);
         $subject = 'Reset Password';
-        $message = 'Please click on the following link: <br>';
-        $message .= '<a href = "'.$reset_link.'">Click here...</a>';
+        $body = 'Please click on the following link: <br>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject, $message));
-        return redirect()->route('admin_login')->with('success', 'Please check your email and following the steps there');
+        \Mail::to($request->email)->send(new Websitemail($subject, $body, $link));
+        return redirect()->back()->with('success', 'Please check your email and following the steps there');
     }
 
     public function reset_password($token, $email){
-        $admin_data = Admin::where('token', $token)->where('email', $email)->first();
-        if (!$admin_data) {
-            return redirect()->route('admin_login');
+        $user_data = User::where('remember_token', $token)->where('email', $email)->first();
+        if (!$user_data) {
+            return redirect()->route('login');
         }
-        return view('admin.reset_password', compact('token', 'email'));
+        return view('auth.passwords.reset', compact('token', 'email'));
     }
 
     public function reset_password_submit(Request $request){
+        
         $request->validate([
             'password'=> 'required',
-            'repassword' => 'required|same:password'
+            'repassword' => 'same:password'
         ]);
-        $admin_data = Admin::where('token', $request->token)->where('email', $request->email)->first();
-        $admin_data->password = Hash::make($request->password);
-        $admin_data->token = '';
-        $admin_data->update();
-        return redirect()->route('admin_login')->with('success', 'Password is reset successfully');
+        $user_data = User::where('remember_token', $request->token)->where('email', $request->email)->first();
+        $user_data->password = Hash::make($request->password);
+        $user_data->remember_token = '';
+        $user_data->update();
+        return redirect()->route('login')->with('success', trans('message.passwordResetSuccess'));
     }
 
     public function edit($id){
@@ -141,12 +145,9 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->mobile_number = $request->mobile_number;
-        if ($request->password != null) {
-            $request->validate([
-                'password' => 'required|same:password',
-                'repassword' => 'required|same:password'
-            ]);
-                $user->password = Hash::make($request->password);
+
+        if ($request->reset_password) {
+            $user->password = Hash::make(config('auth.default_password'));
         }
 
         if($request->hasFile('photo')) {

@@ -40,4 +40,12 @@ class Employee extends Model
     {
         return $this->belongsTo(Employee_status::class, 'employee_status_id');
     }
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function modifier()
+    {
+        return $this->belongsTo(User::class, 'modified_by');
+    }
 }

@@ -16,5 +16,13 @@ class Company extends Model
     {
         return $this->hasMany(Approval::class);
     }
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function modifier()
+    {
+        return $this->belongsTo(User::class, 'modified_by');
+    }
 
 }
