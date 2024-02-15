@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
@@ -22,7 +23,6 @@ class CompanyController extends Controller
     }
 
     public function add(){
-        Storage::disk('uploads')->move('dir1', 'dir2');
         return view('company.add');
     }
 
@@ -65,7 +65,6 @@ class CompanyController extends Controller
             $logoFileName = $request->company_name.'_logo.'.$ext;
             $company->company_logo = $logoFileName;
             Storage::disk('uploads')->putFileAs($directory, $logo, $logoFileName);
-
         }
 
         $company->owner_id = $request->owner_id;

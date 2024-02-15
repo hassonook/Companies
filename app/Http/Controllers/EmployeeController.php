@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Approval;
 use App\Models\Company;
-use App\Models\Nationality;
+use App\Models\Country;
 use App\Models\Martial_status;
 use App\Models\Education_level;
 use App\Models\Profession;
@@ -28,17 +28,17 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         return view('employee.details', compact('employee'));
     }
-    
+
     public function add(){
         $approvals = Approval::get();
         $companies = Company::get();
-        $nationalities = Nationality::get();
+        $nationalities = Country::get();
         $martial_statuses = Martial_status::get();
         $education_levels = Education_level::get();
         $professions = Profession::get();
         $job_titles = Job_title::get();
         $employee_statuses = Employee_status::get();
-        
+
         return view('employee.add', compact(
             'approvals','companies','nationalities','martial_statuses',
             'education_levels','professions','job_titles','employee_statuses'));
@@ -126,7 +126,7 @@ class EmployeeController extends Controller
             $employee->pass_photo = $passFileName;
             Storage::disk('uploads')->putFileAs($tempDirectory, $passFile, $passFileName);
         }
-        
+
         if ($request->hasFile('emp_photo')) {
             $request->validate([
                 'emp_photo' => 'file|mimes:pdf,jpg,jpeg,png,gif|max:5120'
@@ -189,7 +189,7 @@ class EmployeeController extends Controller
         }
         $employee->employee_status_id = $request->employee_status_id;
         $employee->created_by = Auth::id();
-        
+
         try {
             $employee->save();
             $directory = $employee->company->company_name.'/employees/'.$employee->first_name.$employee->id;
@@ -205,7 +205,7 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $approvals = Approval::get();
         $companies = Company::get();
-        $nationalities = Nationality::get();
+        $nationalities = Country::get();
         $martial_statuses = Martial_status::get();
         $education_levels = Education_level::get();
         $professions = Profession::get();
@@ -386,7 +386,7 @@ class EmployeeController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back->with('error', 'Cannot Delete this item please contact system admin!');
         }
-        
+
     }
 
 

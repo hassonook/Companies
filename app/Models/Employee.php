@@ -18,7 +18,7 @@ class Employee extends Model
     }
     public function nationality()
     {
-        return $this->belongsTo(Nationality::class, 'nationality_id');
+        return $this->belongsTo(Country::class, 'nationality_id');
     }
     public function martial_status()
     {
