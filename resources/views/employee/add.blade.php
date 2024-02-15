@@ -34,9 +34,9 @@
                                     <label for="company_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.company') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 @error('company_id') parsley-error @enderror" name="company_id" id="company_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($companies as $company)
-                                            <option value="{{ $company->id }}" @if(old('company_id') == $company->id) selected @endif>{{ App::getLocale() == 'ar' ? $company->company_name_ar : $company->company_name }}</option>                                                
+                                            <option value="{{ $company->id }}" @if(old('company_id') == $company->id) selected @endif>{{ App::getLocale() == 'ar' ? $company->company_name_ar : $company->company_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('company_id')
@@ -193,9 +193,9 @@
                                     <label for="approval_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.approval') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select" name="approval_id" id="approval_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($approvals as $approval)
-                                            <option value="{{ $approval->id }} @if(old('approval_id') == $approval->id) selected @endif">{{ $approval->vp_no }}</option>                                                
+                                            <option value="{{ $approval->id }} @if(old('approval_id') == $approval->id) selected @endif">{{ $approval->vp_no }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -204,9 +204,9 @@
                                     <label for="nationality_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.nationality') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select @error('nationality_id') parsley-error @enderror" name="nationality_id" id="nationality_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($nationalities as $nationality)
-                                            <option value="{{ $nationality->id }} @if(old('nationality_id') == $nationality->id) selected @endif">{{App::getLocale() == 'ar' ? $nationality->name_ar : $nationality->name}}</option>                                                
+                                            <option value="{{ $nationality->code }} @if(old('nationality_id') == $nationality->code) selected @endif">{{App::getLocale() == 'ar' ? $nationality->name_ar : $nationality->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('nationality_id')
@@ -218,9 +218,9 @@
                                     <label for="martial_status_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.martialStatus') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select" name="martial_status_id" id="martial_status_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($martial_statuses as $martial_status)
-                                            <option value="{{ $martial_status->id }} @if(old('martial_status_id') == $martial_status->id) selected @endif">{{App::getLocale() == 'ar' ? $martial_status->name_ar : $martial_status->name}}</option>                                                
+                                            <option value="{{ $martial_status->id }} @if(old('martial_status_id') == $martial_status->id) selected @endif">{{App::getLocale() == 'ar' ? $martial_status->name_ar : $martial_status->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -229,9 +229,9 @@
                                     <label for="education_level_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.educationLevel') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select" name="education_level_id" id="education_level_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($education_levels as $education_level)
-                                            <option value="{{ $education_level->id }} @if(old('education_level_id') == $education_level->id) selected @endif">{{App::getLocale() == 'ar' ? $education_level->name_ar : $education_level->name}}</option>                                                
+                                            <option value="{{ $education_level->id }} @if(old('education_level_id') == $education_level->id) selected @endif">{{App::getLocale() == 'ar' ? $education_level->name_ar : $education_level->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -240,9 +240,9 @@
                                     <label for="profession_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.profession') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select" name="profession_id" id="profession_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($professions as $profession)
-                                            <option value="{{ $profession->id }} @if(old('profession_id') == $profession->id) selected @endif">{{App::getLocale() == 'ar' ? $profession->name_ar : $profession->name}}</option>                                                
+                                            <option value="{{ $profession->id }} @if(old('profession_id') == $profession->id) selected @endif">{{App::getLocale() == 'ar' ? $profession->name_ar : $profession->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -251,9 +251,9 @@
                                     <label for="job_title_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.jobTitle') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select @error('job_title_id') parsley-error @enderror" name="job_title_id" id="job_title_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($job_titles as $job_title)
-                                            <option value="{{ $job_title->id }} @if(old('job_title_id') == $job_title->id) selected @endif">{{App::getLocale() == 'ar' ? $job_title->name_ar : $job_title->name}}</option>                                                
+                                            <option value="{{ $job_title->id }} @if(old('job_title_id') == $job_title->id) selected @endif">{{App::getLocale() == 'ar' ? $job_title->name_ar : $job_title->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('job_title_id')
@@ -418,9 +418,9 @@
                                     <label for="employee_status_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.status') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select @error('employee_status_id') parsley-error @enderror" name="employee_status_id" id="employee_status_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($employee_statuses as $employee_status)
-                                            <option value="{{ $employee_status->id }} @if(old('employee_status_id') == $employee_status->id) selected @endif">{{App::getLocale() == 'ar' ? $employee_status->name_ar : $employee_status->name}}</option>                                                
+                                            <option value="{{ $employee_status->id }} @if(old('employee_status_id') == $employee_status->id) selected @endif">{{App::getLocale() == 'ar' ? $employee_status->name_ar : $employee_status->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('employee_status_id')

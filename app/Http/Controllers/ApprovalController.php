@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Approval;
 use App\Models\Company;
-use App\Models\Nationality;
+use App\Models\Country;
 use App\Models\Job_title;
 use App\Mail\Websitemail;
 use Auth;
@@ -23,10 +23,10 @@ class ApprovalController extends Controller
         $approval = Approval::find($id);
         return view('approval.details', compact('approval'));
     }
-    
+
     public function add(){
         $companies = Company::get();
-        $nationalities = Nationality::get();
+        $nationalities = Country::get();
         $job_titles = Job_title::get();
         return view('approval.add', compact('companies','nationalities','job_titles'));
     }
@@ -66,7 +66,7 @@ class ApprovalController extends Controller
     public function edit($id){
         $approval = Approval::find($id);
         $companies = Company::get();
-        $nationalities = Nationality::get();
+        $nationalities = Country::get();
         $job_titles = Job_title::get();
         return view('approval.edit', compact('approval','companies','nationalities','job_titles'));
     }

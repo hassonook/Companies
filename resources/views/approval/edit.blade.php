@@ -35,9 +35,9 @@
                                     <label for="company_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('approvals.company') }}</label>
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 @error('company_id') parsley-error @enderror" name="company_id" id="company_id" style="width: 100%">
-                                            <option value="">{{ __('master.select') }}</option>                                                
+                                            <option value="">{{ __('master.select') }}</option>
                                             @foreach ($companies as $company)
-                                            <option value="{{ $company->id }}" @if($approval->company_id == $company->id) selected @endif>{{ App::getLocale() == 'ar' ? $company->company_name_ar : $company->company_name }}</option>                                                
+                                            <option value="{{ $company->id }}" @if($approval->company_id == $company->id) selected @endif>{{ App::getLocale() == 'ar' ? $company->company_name_ar : $company->company_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('company_id')
@@ -87,7 +87,7 @@
                                         <select class="select2 form-control mb-3 @error('nationality_id') parsley-error @enderror" name="nationality_id" id="nationality_id" style="width: 100%">
                                             <option value="">Select</option>
                                             @foreach ($nationalities as $nationality)
-                                            <option value="{{ $nationality->id }}" @if($approval->nationality_id == $nationality->id) selected @endif>{{ App::getLocale() == 'ar' ? $nationality->name_ar : $nationality->name }}</option>                                                
+                                            <option value="{{ $nationality->code }}" @if($approval->nationality_id == $nationality->code) selected @endif>{{ App::getLocale() == 'ar' ? $nationality->name_ar : $nationality->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('nationality_id')
@@ -101,7 +101,7 @@
                                         <select class="select2 form-control mb-3 @error('job_title_id') parsley-error @enderror" name="job_title_id" id="job_title_id" style="width: 100%">
                                             <option value="">Select</option>
                                             @foreach ($job_titles as $job_title)
-                                            <option value="{{ $job_title->id }}" @if($approval->job_title_id == $job_title->id) selected @endif>{{ App::getLocale() == 'ar' ? $job_title->name_ar : $job_title->name }}</option>                                                
+                                            <option value="{{ $job_title->id }}" @if($approval->job_title_id == $job_title->id) selected @endif>{{ App::getLocale() == 'ar' ? $job_title->name_ar : $job_title->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('job_title_id')
