@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
     public function employees()
     {
         return $this->hasMany(Employee::class);
@@ -15,6 +18,13 @@ class Company extends Model
     public function approvals()
     {
         return $this->hasMany(Approval::class);
+    }
+    /**
+     * Get the bank accounts for the company.
+     */
+    public function bankAccounts()
+    {
+        return $this->hasMany(CompanyBankAccount::class);
     }
     public function creator()
     {

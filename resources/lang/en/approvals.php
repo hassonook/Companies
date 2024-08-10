@@ -13,4 +13,8 @@
     'gender' => "Gender",
     'total' => "Total",
     'consumed' => "Consumed",
+    'jobName' => "Job Name",
+    'jobNameAr' => "Job Name(Ar)",
+    'addNewJob' => "Add New Job",
+    'newJob' => "New Job",
 ];

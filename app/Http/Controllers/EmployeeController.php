@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
@@ -32,7 +33,10 @@ class EmployeeController extends Controller
     public function add(){
         $approvals = Approval::get();
         $companies = Company::get();
-        $nationalities = Country::get();
+        $nationalities = Country::pluck('name', 'country_code');
+        if (App::getLocale() == 'ar') {
+            $nationalities = Country::pluck('name_ar', 'country_code');
+        }
         $martial_statuses = Martial_status::get();
         $education_levels = Education_level::get();
         $professions = Profession::get();
@@ -79,7 +83,8 @@ class EmployeeController extends Controller
             'address' => 'nullable|max:50',
             'salary' => 'nullable|numeric',
             'bank_name' => 'nullable|max:30',
-            'bank_account' => 'nullable|max:30'
+            'bank_account' => 'nullable|max:30',
+            'remarks' => 'nullable|max:250',
         ]);
         $employee->company_id = $request->company_id;
         $employee->first_name = $request->first_name;
@@ -115,6 +120,7 @@ class EmployeeController extends Controller
         $employee->salary = $request->salary;
         $employee->bank_name = $request->bank_name;
         $employee->bank_account = $request->bank_account;
+        $employee->remarks = $request->remarks;
 
         if ($request->hasFile('pass_photo')) {
             $request->validate([
@@ -205,7 +211,10 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $approvals = Approval::get();
         $companies = Company::get();
-        $nationalities = Country::get();
+        $nationalities = Country::pluck('name', 'country_code');
+        if (App::getLocale() == 'ar') {
+            $nationalities = Country::pluck('name_ar', 'country_code');
+        }
         $martial_statuses = Martial_status::get();
         $education_levels = Education_level::get();
         $professions = Profession::get();
@@ -249,7 +258,8 @@ class EmployeeController extends Controller
             'address' => 'nullable|max:50',
             'salary' => 'nullable|numeric',
             'bank_name' => 'nullable|max:30',
-            'bank_account' => 'nullable|max:30'
+            'bank_account' => 'nullable|max:30',
+            'remarks' => 'nullable|max:250',
         ]);
 
         $directory = $employee->company->company_name.'/employees/'.$employee->first_name.$employee->id;
@@ -361,6 +371,7 @@ class EmployeeController extends Controller
         $employee->bank_name = $request->bank_name;
         $employee->bank_account = $request->bank_account;
         $employee->employee_status_id = $request->employee_status_id;
+        $employee->remarks = $request->remarks;
         $employee->modified_by = Auth::id();
         try {
             $employee->update();
@@ -382,9 +393,9 @@ class EmployeeController extends Controller
         try {
             Storage::disk('uploads')->deleteDirectory($directory);
             $employee->delete();
-            return redirect()->route('employees')->with('success', 'User deleted successfully! ');
+            return response()->json(['message' => 'Record deleted successfully']);
         } catch (\Throwable $th) {
-            return redirect()->back->with('error', 'Cannot Delete this item please contact system admin!');
+            return response()->json(['message' => 'Record not found'], 404);
         }
 
     }

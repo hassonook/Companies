@@ -82,8 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="reset_password"
-                                        class="col-sm-3 form-label align-self-center mb-lg-0 text-end">{{ __('auth.resetPassword') }}</label>
+                                    <label for="reset_password" class="col-sm-3 form-label align-self-center mb-lg-0 text-end">{{ __('auth.resetPassword') }}</label>
                                     <div class="col-sm-9">
                                         <div class="checkbox checkbox-danger checkbox-single mb-2">
                                             <input type="checkbox" id="reset_password" name="reset_password" value="true" aria-label="Single checkbox One">

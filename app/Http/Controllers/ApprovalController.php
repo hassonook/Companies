@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Approval;
@@ -26,7 +27,10 @@ class ApprovalController extends Controller
 
     public function add(){
         $companies = Company::get();
-        $nationalities = Country::get();
+        $nationalities = Country::pluck('name', 'country_code');
+        if (App::getLocale() == 'ar') {
+            $nationalities = Country::pluck('name_ar', 'country_code');
+        }
         $job_titles = Job_title::get();
         return view('approval.add', compact('companies','nationalities','job_titles'));
     }
@@ -66,7 +70,10 @@ class ApprovalController extends Controller
     public function edit($id){
         $approval = Approval::find($id);
         $companies = Company::get();
-        $nationalities = Country::get();
+        $nationalities = Country::pluck('name', 'country_code');
+        if (App::getLocale() == 'ar') {
+            $nationalities = Country::pluck('name_ar', 'country_code');
+        }
         $job_titles = Job_title::get();
         return view('approval.edit', compact('approval','companies','nationalities','job_titles'));
     }
@@ -106,10 +113,10 @@ class ApprovalController extends Controller
         $approval = Approval::find($id);
         try {
             $approval->delete();
+            return response()->json(['message' => 'Record deleted successfully']);
         } catch (\Throwable $th) {
-            return redirect()->back->with('error', 'Cannot Delete this item please contact system admin!');
+            return response()->json(['message' => 'Record not found'], 404);
         }
-        return redirect()->route('approval')->with('success', 'User deleted successfully! ');
     }
 
 }

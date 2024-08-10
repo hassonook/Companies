@@ -3,14 +3,14 @@
     Employee-details
 @endsection
 @section('css')
-
 @endsection
 @section('content')
     <div class="row navbar-custom">
         <ul class="list-unstyled topbar-nav mb-0">
             <li class="creat-btn">
                 <div class="nav-link">
-                    <a class=" btn btn-sm btn-soft-primary" href="{{ route('employees') }}" role="button"><i class="fas fa-backward me-2"></i>{{ __('master.back') }}</a>
+                    <a class=" btn btn-sm btn-soft-primary" href="{{ route('employees') }}" role="button"><i
+                            class="fas fa-backward me-2"></i>{{ __('master.back') }}</a>
                 </div>
             </li>
             <li>
@@ -47,7 +47,7 @@
                                     </dd>
                                     <dt>{{ __('employees.jobTitle') }}</dt>
                                     <dd>
-                                        {{ App::getLocale() == 'ar' ? $employee->job_title->name_ar : $employee->job_title->name }}
+                                        {{ App::getLocale() == 'ar' ? $employee->job_title->name_ar ?? '' : $employee->job_title->name ?? '' }}
                                     </dd>
                                     <dt>{{ __('employees.hireDate') }}</dt>
                                     <dd>{{ $employee->hire_date }}</dd>
@@ -79,6 +79,10 @@
                                         <dt>{{ __('employees.visaNo') }}</dt>
                                         <dd>{{ __('master.na') }}</dd>
                                     @endif
+                                    <dt>{{ __('employees.nationality') }}</dt>
+                                    <dd>
+                                        {{ App::getLocale() == 'ar' ? $employee->nationality->name_ar ?? ' ' : $$employee->nationality->name ?? ' ' }}
+                                    </dd>
                                     <dt>{{ __('employees.email') }}</dt>
                                     <dd>{{ $employee->email }}</dd>
                                     <dt>{{ __('employees.mobileNo') }}</dt>
@@ -118,8 +122,10 @@
                                         @endif
                                     </dd>
                                     <dt>{{ __('employees.status') }}</dt>
-                                    <dd>{{ App::getLocale() == 'ar' ? $employee->employee_status->name_ar : $employee->employee_status->name }}
+                                    <dd>{{ App::getLocale() == 'ar' ? $employee->employee_status->name_ar ?? '' : $employee->employee_status->name ?? '' }}
                                     </dd>
+                                    <dt>{{ __('master.remarks') }}</dt>
+                                    <dd>{{ $employee->remarks }}</dd>
                                     <dt>{{ __('master.createdAt') }}</dt>
                                     <dd>{{ $employee->created_at }}</dd>
                                     <dt>{{ __('master.createdBy') }}</dt>
@@ -132,74 +138,137 @@
                             </div>
                             <div class="row">
                                 @if ($employee->pass_photo != null)
-                                <div class="col-md-2 col-sm-4">
-                                    <div class="card">
-                                        <img class="align-self-center" src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40" alt="Card image cap">
-                                        <div class="py-2 text-center">
-                                            <a href="{{ URL::asset('uploads/'.$employee->company->company_name.'/employees/'.$employee->first_name.$employee->id.'/'.$employee->pass_photo) }}"
-                                                 class="text-muted">{{ __('employees.passPhoto') }}<i class="dripicons-download ms-1"></i></a>
+                                    <div class="col-md-2 col-sm-4">
+                                        <div class="card">
+                                            <img class="align-self-center"
+                                                src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40"
+                                                alt="Card image cap">
+                                            <div class="py-2 text-center">
+                                                <a href="{{ URL::asset('uploads/' . $employee->company->company_name . '/employees/' . $employee->first_name . $employee->id . '/' . $employee->pass_photo) }}"
+                                                    class="text-muted">{{ __('employees.passPhoto') }}<i
+                                                        class="dripicons-download ms-1"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if ($employee->visa_photo != null)
-                                <div class="col-md-2 col-sm-4">
-                                    <div class="card">
-                                        <img class="align-self-center" src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40" alt="Card image cap">
-                                        <div class="py-2 text-center">
-                                            <a href="{{ URL::asset('uploads/'.$employee->company->company_name.'/employees/'.$employee->first_name.$employee->id.'/'.$employee->visa_photo) }}"
-                                                 class="text-muted">{{ __('employees.visaPhoto') }}<i class="dripicons-download ms-1"></i></a>
+                                    <div class="col-md-2 col-sm-4">
+                                        <div class="card">
+                                            <img class="align-self-center"
+                                                src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40"
+                                                alt="Card image cap">
+                                            <div class="py-2 text-center">
+                                                <a href="{{ URL::asset('uploads/' . $employee->company->company_name . '/employees/' . $employee->first_name . $employee->id . '/' . $employee->visa_photo) }}"
+                                                    class="text-muted">{{ __('employees.visaPhoto') }}<i
+                                                        class="dripicons-download ms-1"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if ($employee->qid_photo != null)
-                                <div class="col-md-2 col-sm-4">
-                                    <div class="card">
-                                        <img class="align-self-center" src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40" alt="Card image cap">
-                                        <div class="py-2 text-center">
-                                            <a href="{{ URL::asset('uploads/'.$employee->company->company_name.'/employees/'.$employee->first_name.$employee->id.'/'.$employee->qid_photo) }}"
-                                                 class="text-muted">{{ __('employees.qidPhoto') }}<i class="dripicons-download ms-1"></i></a>
+                                    <div class="col-md-2 col-sm-4">
+                                        <div class="card">
+                                            <img class="align-self-center"
+                                                src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40"
+                                                alt="Card image cap">
+                                            <div class="py-2 text-center">
+                                                <a href="{{ URL::asset('uploads/' . $employee->company->company_name . '/employees/' . $employee->first_name . $employee->id . '/' . $employee->qid_photo) }}"
+                                                    class="text-muted">{{ __('employees.qidPhoto') }}<i
+                                                        class="dripicons-download ms-1"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if ($employee->contract != null)
-                                <div class="col-md-2 col-sm-4">
-                                    <div class="card">
-                                        <img class="align-self-center" src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40" alt="Card image cap">
-                                        <div class="py-2 text-center">
-                                            <a href="{{ URL::asset('uploads/'.$employee->company->company_name.'/employees/'.$employee->first_name.$employee->id.'/'.$employee->contract) }}"
-                                                 class="text-muted">{{ __('employees.contract') }}<i class="dripicons-download ms-1"></i></a>
+                                    <div class="col-md-2 col-sm-4">
+                                        <div class="card">
+                                            <img class="align-self-center"
+                                                src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40"
+                                                alt="Card image cap">
+                                            <div class="py-2 text-center">
+                                                <a href="{{ URL::asset('uploads/' . $employee->company->company_name . '/employees/' . $employee->first_name . $employee->id . '/' . $employee->contract) }}"
+                                                    class="text-muted">{{ __('employees.contract') }}<i
+                                                        class="dripicons-download ms-1"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if ($employee->certificate != null)
-                                <div class="col-md-2 col-sm-4">
-                                    <div class="card">
-                                        <img class="align-self-center" src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40" alt="Card image cap">
-                                        <div class="py-2 text-center">
-                                            <a href="{{ URL::asset('uploads/'.$employee->company->company_name.'/employees/'.$employee->first_name.$employee->id.'/'.$employee->certificate) }}"
-                                                 class="text-muted">{{ __('employees.certificate') }}<i class="dripicons-download ms-1"></i></a>
+                                    <div class="col-md-2 col-sm-4">
+                                        <div class="card">
+                                            <img class="align-self-center"
+                                                src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40"
+                                                alt="Card image cap">
+                                            <div class="py-2 text-center">
+                                                <a href="{{ URL::asset('uploads/' . $employee->company->company_name . '/employees/' . $employee->first_name . $employee->id . '/' . $employee->certificate) }}"
+                                                    class="text-muted">{{ __('employees.certificate') }}<i
+                                                        class="dripicons-download ms-1"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if ($employee->resume != null)
-                                <div class="col-md-2 col-sm-4">
-                                    <div class="card">
-                                        <img class="align-self-center" src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40" alt="Card image cap">
-                                        <div class="py-2 text-center">
-                                            <a href="{{ URL::asset('uploads/'.$employee->company->company_name.'/employees/'.$employee->first_name.$employee->id.'/'.$employee->resume) }}"
-                                                 class="text-muted">{{ __('employees.resume') }}<i class="dripicons-download ms-1"></i></a>
+                                    <div class="col-md-2 col-sm-4">
+                                        <div class="card">
+                                            <img class="align-self-center"
+                                                src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" width="40"
+                                                alt="Card image cap">
+                                            <div class="py-2 text-center">
+                                                <a href="{{ URL::asset('uploads/' . $employee->company->company_name . '/employees/' . $employee->first_name . $employee->id . '/' . $employee->resume) }}"
+                                                    class="text-muted">{{ __('employees.resume') }}<i
+                                                        class="dripicons-download ms-1"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                             </div>
-                    </div><!--end col-->
+                        </div><!--end col-->
                     </div><!--end row-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Pills</h4>
+                                    <p class="text-muted mb-0">The tabs plugin also works with pills.</p>
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-pills nav-justified" role="tablist">
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab" aria-selected="true">Home</a>
+                                        </li>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab" aria-selected="false">Profile</a>
+                                        </li>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab" aria-selected="false">Settings</a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane p-3 active" id="home-1" role="tabpanel">
+                                            <p class="text-muted mb-0">
+                                                Raw denim you probably haven't heard of them jean shorts Austin.
+                                            </p>
+                                        </div>
+                                        <div class="tab-pane p-3" id="profile-1" role="tabpanel">
+                                            <p class="text-muted mb-0">
+                                                Food truck fixie locavore, accusamus mcsweeney's
+                                                single-origin coffee squid.
+                                            </p>
+                                        </div>
+                                        <div class="tab-pane p-3" id="settings-1" role="tabpanel">
+                                            <p class="text-muted mb-0">
+                                                Trust fund seitan letterpress, keytar raw denim keffiyeh etsy.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+
+                    </div>
                 </div><!--end card-body-->
             </div><!--end card-->
         </div><!--end col-->

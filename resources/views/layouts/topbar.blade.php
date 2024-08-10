@@ -24,7 +24,7 @@
                     {{ Config::get('languages')[App::getLocale()]['display'] }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    @foreach (Config::get('languages') as $lang => $language) 
+                    @foreach (Config::get('languages') as $lang => $language)
                         @if ($lang != App::getLocale())
                             <a class="dropdown-item" href="{{ Route('lang.switch', $lang) }}">
                                 <span class="fi fi-{{ $language['flag-icon'] }}"></span>
@@ -34,7 +34,7 @@
                     @endforeach
                 </div>
             </li>
-            
+
 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
@@ -128,7 +128,7 @@
                     <img src="{{ (isset(Auth::user()->avatar) && Auth::user()->avatar != '')  ? asset(Auth::user()->avatar) : asset('/assets/images/users/user-1.jpg') }}" alt="profile-user" class="rounded-circle thumb-xs" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="/pages-profile"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i>{{ __('auth.profile') }}</a>
+                    <a class="dropdown-item" href="{{ route('user', Auth::user()->id) }}"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i>{{ __('auth.profile') }}</a>
                     <a class="dropdown-item" href="#"><i data-feather="settings" class="align-self-center icon-xs icon-dual me-1"></i> {{ __('auth.settings') }}</a>
                     <div class="dropdown-divider mb-0"></div>
                     <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="power" class="align-self-center icon-xs icon-dual me-1"></i> <span key="t-logout">{{ __('auth.logout') }}</span></a>

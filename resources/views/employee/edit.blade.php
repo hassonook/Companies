@@ -185,8 +185,8 @@
                                     <div class="col-sm-10">
                                         <select class="select2 form-control mb-3 custom-select @error('nationality_id') parsley-error @enderror" name="nationality_id" id="nationality_id" style="width: 100%">
                                             <option value="">{{ __('master.select') }}</option>
-                                            @foreach ($nationalities as $nationality)
-                                            <option value="{{ $nationality->code }}" @if($employee->nationality_id == $nationality->code) selected @endif>{{App::getLocale() == 'ar' ? $nationality->name_ar : $nationality->name}}</option>
+                                            @foreach ($nationalities as $code => $name)
+                                            <option value="{{ $code }}" @if($employee->nationality_id == $code) selected @endif>{{$name}}</option>
                                             @endforeach
                                         </select>
                                         @error('nationality_id')
@@ -218,7 +218,7 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="profession_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.profession') }}</label>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-6">
                                         <select class="select2 form-control mb-3 custom-select" name="profession_id" id="profession_id" style="width: 100%">
                                             <option value="">{{ __('master.select') }}</option>
                                             @foreach ($professions as $profession)
@@ -226,10 +226,15 @@
                                             @endforeach
                                         </select>
                                     </div>
+
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#professionModal">{{ __('master.add') }}</button>
+                                    </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="job_title_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('employees.jobTitle') }}</label>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-6">
                                         <select class="select2 form-control mb-3 custom-select @error('job_title_id') parsley-error @enderror" name="job_title_id" id="job_title_id" style="width: 100%">
                                             <option value="">{{ __('master.select') }}</option>
                                             @foreach ($job_titles as $job_title)
@@ -239,6 +244,11 @@
                                         @error('job_title_id')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#jobModal">{{ __('master.add') }}</button>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -473,6 +483,17 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="mb-3 row">
+                                    <label for="remarks" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('master.remarks') }}</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control mb-3 @error('remarks') parsley-error @enderror" name="remarks" id="remarks" style="width: 100%">
+                                            {{ $employee->remarks }}
+                                        </textarea>
+                                        @error('remarks')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
 
 
 
@@ -489,13 +510,148 @@
             </div><!--end card-->
         </div><!--end col-->
     </div>
+    <div class="modal fade" id="jobModal" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title m-0" id="jobModalLabel">{{ __('master.new') }}</h6>
+                    <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div><!--end modal-header-->
+                <div class="modal-body">
+                    <div class="card-body p-0">
+                        <form id="newJobForm" method="POST">
+                            @csrf
+                            <div class="form-group mb-2">
+                                <label class="form-label" for="jobName">{{ __('master.name') }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="name" id="jobName">
+                                </div>
+                            </div><!--end form-group-->
+
+                            <div class="form-group mb-2">
+                                <label class="form-label" for="jobNameAr">{{ __('master.nameAr') }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="nameAr" id="jobNameAr">
+                                </div>
+                            </div><!--end form-group-->
+
+                            <div class="form-group mb-0 row">
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 waves-effect waves-light"
+                                        type="submit">{{ __('master.save') }}</button>
+                                </div><!--end col-->
+                            </div> <!--end form-group-->
+                        </form>
+                    </div><!--end card-body-->
+                </div><!--end modal-body-->
+
+            </div><!--end modal-content-->
+        </div><!--end modal-dialog-->
+    </div><!--end modal-->
+    <div class="modal fade" id="professionModal" tabindex="-1" role="dialog" aria-labelledby="professionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title m-0" id="professionModalLabel">{{ __('master.new') }}</h6>
+                    <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div><!--end modal-header-->
+                <div class="modal-body">
+                    <div class="card-body p-0">
+                        <form id="newProfessionForm" method="POST">
+                            @csrf
+                            <div class="form-group mb-2">
+                                <label class="form-label" for="professionName">{{ __('master.name') }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="name" id="professionName">
+                                </div>
+                            </div><!--end form-group-->
+
+                            <div class="form-group mb-2">
+                                <label class="form-label" for="professionNameAr">{{ __('master.nameAr') }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="nameAr" id="professionNameAr">
+                                </div>
+                            </div><!--end form-group-->
+
+                            <div class="form-group mb-0 row">
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 waves-effect waves-light"
+                                        type="submit">{{ __('master.save') }}</button>
+                                </div><!--end col-->
+                            </div> <!--end form-group-->
+                        </form>
+                    </div><!--end card-body-->
+                </div><!--end modal-body-->
+
+            </div><!--end modal-content-->
+        </div><!--end modal-dialog-->
+    </div><!--end modal-->
 @endsection
 @section('script')
     <script src="{{ URL::asset('assets/plugins/select2/select2.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/app.js') }}"></script>
     <script>
-        $(document).ready(function () {
-            $('select.parsley-error').next().find('span.select2-selection.select2-selection--single').addClass('parsley-error');
+        $(document).ready(function() {
+            $('select').select2({
+                width: '100%'
+            });
+            $('select.parsley-error').next().find('span.select2-selection.select2-selection--single').addClass(
+                'parsley-error');
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////
+            document.getElementById('newJobForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var lang = "{{ App::getLocale() }}";
+                var formData = new FormData(this);
+                // Send form data using Axios
+                axios.post('/lookup/job', formData)
+                    .then(function(response) {
+                        var dropdown = document.getElementById('job_title_id');
+                        var option = document.createElement('option');
+                        option.value = response.data.id;
+                        if (lang == 'en') {
+                            option.text = response.data.name;
+                        } else {
+                            option.text = response.data.name_ar;
+                        }
+
+                        dropdown.add(option);
+                        option.selected = true;
+                        document.getElementById('jobModal').click();
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
+            });
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            document.getElementById('newProfessionForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var lang = "{{ App::getLocale() }}";
+                var formData = new FormData(this);
+                // Send form data using Axios
+                axios.post('/lookup/profession', formData)
+                    .then(function(response) {
+                        var dropdown = document.getElementById('profession_id');
+                        var option = document.createElement('option');
+                        option.value = response.data.id;
+                        if (lang == 'en') {
+                            option.text = response.data.name;
+                        } else {
+                            option.text = response.data.name_ar;
+                        }
+
+                        dropdown.add(option);
+                        option.selected = true;
+                        document.getElementById('professionModal').click();
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
+            });
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         });
     </script>
 @endsection

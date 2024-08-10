@@ -53,4 +53,8 @@ return [
     'userEdit' => 'تعديل بيانات المستخدم',
     'userDetails' => 'تفاصيل المستخدم',
     'reset' => 'إعادة التعيين',
+    'changePassword' => 'تغيير كلمة المرور',
+    'change' => 'تغيير',
+    'oldPassword' => 'كلمة المرور الحالية',
+    'enterOldPassword' => 'أدخل كلمة المرور الحالية',
 ];

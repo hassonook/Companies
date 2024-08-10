@@ -43,7 +43,7 @@
     "salary" => "Salary",
     "bankName" => "Bank Name",
     "bankAccount" => "Bank Account",
-    "status" => "Status",    
-    "male" => "Male",    
-    "female" => "Female",    
+    "status" => "Status",
+    "male" => "Male",
+    "female" => "Female",
 ];

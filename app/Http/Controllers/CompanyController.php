@@ -18,7 +18,7 @@ class CompanyController extends Controller
     }
 
     public function details($id){
-        $company = Company::find($id);
+        $company = Company::with('bankAccounts')->findOrFail($id);
         return view('company.details', compact('company'));
     }
 
@@ -56,6 +56,7 @@ class CompanyController extends Controller
             'telephone' => 'regex:/^(\+?\d{1,3}[\s-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/',
             'email' => 'nullable|email',
             'website' => 'nullable|url',
+            'remarks' => 'nullable|max:250',
         ]);
         $company->company_name = $request->company_name;
         $company->company_name_ar = $request->company_name_ar;
@@ -105,6 +106,7 @@ class CompanyController extends Controller
         $company->telephone = $request->telephone;
         $company->email = $request->email;
         $company->website = $request->website;
+        $company->remarks = $request->remarks;
         $company->created_by = Auth::id();
 
         try {
@@ -150,6 +152,7 @@ class CompanyController extends Controller
             'telephone' => 'regex:/^(\+?\d{1,3}[\s-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/',
             'email' => 'nullable|email',
             'website' => 'nullable|url',
+            'remarks' => 'nullable|max:250',
         ]);
 
         $directory = $company->company_name.'/profile/';
@@ -212,6 +215,7 @@ class CompanyController extends Controller
         $company->telephone = $request->telephone;
         $company->email = $request->email;
         $company->website = $request->website;
+        $company->remarks = $request->remarks;
         $company->modified_by = Auth::id();
         try {
             $company->update();
@@ -227,11 +231,12 @@ class CompanyController extends Controller
         try {
             Storage::disk('uploads')->deleteDirectory($company->company_name);
             $company->delete();
-            return redirect()->route('companies')->with('success', 'User deleted successfully! ');
+            return response()->json(['message' => 'Record deleted successfully']);
         } catch (\Throwable $th) {
-            return redirect()->back->with('error', $th->getMessage());
+            return response()->json(['message' => 'Record not found'], 404);
         }
 
     }
+
 
 }

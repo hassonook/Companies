@@ -34,11 +34,13 @@
                             class="align-self-center menu-icon"></i><span>{{__('master.approvals') }}</span><span
                             class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 </li>
+                @if (Auth::user()->hasRole('Admin'))
                 <li>
                     <a href="{{ route('users') }}"><i data-feather="users"
                             class="align-self-center menu-icon"></i><span>{{__('master.users') }}</span><span
                             class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 </li>
+                @endif
             </ul>
         </div>
     </div>

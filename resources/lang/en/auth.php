@@ -40,7 +40,7 @@ return [
     'loginFooter' => 'Hllol ©',
     'settings' => 'Settings',
     'profile' => 'Profile',
-    'name' => 'User Name',
+    'name' => 'Name',
     'email' => 'Email',
     'mobileNo' => 'Mobile Number',
     'role' => 'Role',
@@ -54,5 +54,9 @@ return [
     'userEdit' => 'User Edit',
     'userDetails' => 'User Details',
     'reset' => 'Reset',
+    'changePassword' => 'Change Password',
+    'change' => 'Change',
+    'oldPassword' => 'Old Password',
+    'enterOldPassword' => 'Enter Old Password',
 
 ];

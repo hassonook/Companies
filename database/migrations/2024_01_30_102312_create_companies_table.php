@@ -13,38 +13,39 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->text('company_name');
-            $table->text('company_name_ar');
-            $table->text('company_logo')->nullable();
-            $table->text('owner_id');
-            $table->text('owner_phone');
-            $table->text('registration_id');
+            $table->string('company_name');
+            $table->string('company_name_ar');
+            $table->string('company_logo')->nullable();
+            $table->string('owner_id');
+            $table->string('owner_phone');
+            $table->string('registration_id');
             $table->date('reg_issue_date');
             $table->date('reg_expire_date');
-            $table->text('reg_photo');
-            $table->text('commercial_id');
+            $table->string('reg_photo');
+            $table->string('commercial_id');
             $table->date('com_issue_date');
             $table->date('com_expire_date');
-            $table->text('com_photo');
-            $table->text('license_no');
+            $table->string('com_photo');
+            $table->string('license_no');
             $table->date('lic_issue_date');
             $table->date('lic_expire_date');
-            $table->text('lic_photo');
-            $table->text('main_branch');
-            $table->text('business');
-            $table->text('company_address');
-            $table->text('telephone')->nullable();
-            $table->text('email')->nullable();
-            $table->text('website')->nullable();
+            $table->string('lic_photo');
+            $table->string('main_branch');
+            $table->string('business');
+            $table->string('company_address');
+            $table->string('telephone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->text('remarks')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('modified_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('modified_by')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('modified_by')->references('id')->on('users');
+            $table->foreign('deleted_by')->references('id')->on('users');
         });
     }
 

@@ -14,6 +14,12 @@
     'createdBy' => "Created By",
     'updatedAt' => "Modified On",
     'modifiedBy' => "Modified By",
-    
-
+    'delete' => "Delete",
+    'close' => "Close",
+    'remarks' => "Remarks",
+    'save' => "Save",
+    'add' => "Add",
+    'new' => "New",
+    'name' => "Name",
+    'nameAr' => "Name (Ar)"
 ];

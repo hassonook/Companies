@@ -18,7 +18,7 @@ class Employee extends Model
     }
     public function nationality()
     {
-        return $this->belongsTo(Country::class, 'nationality_id');
+        return $this->belongsTo(Country::class, 'nationality_id', 'country_code');
     }
     public function martial_status()
     {
@@ -39,6 +39,13 @@ class Employee extends Model
     public function employee_status()
     {
         return $this->belongsTo(Employee_status::class, 'employee_status_id');
+    }
+    /**
+     * Get the bank accounts for the employee.
+     */
+    public function bankAccounts()
+    {
+        return $this->hasMany(EmployeeBankAccount::class);
     }
     public function creator()
     {

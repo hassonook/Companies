@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('professions', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('name_ar');
+            $table->text('name')->unique();
+            $table->text('name_ar')->unique();
             $table->timestamps();
         });
     }

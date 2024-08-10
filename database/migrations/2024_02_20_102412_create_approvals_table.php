@@ -13,29 +13,30 @@ return new class extends Migration
     {
         Schema::create('approvals', function (Blueprint $table) {
             $table->id();
-            $table->text('vp_no');
-            $table->text('req_no');
+            $table->string('vp_no');
+            $table->string('req_no');
             $table->date('issue_date');
             $table->date('expire_date');
-            $table->text('gender');
+            $table->string('gender');
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('nationality_id');
+            $table->string('nationality_id', 2);
             $table->unsignedBigInteger('job_title_id');
             $table->unsignedInteger('total');
             $table->unsignedInteger('consumed');
+            $table->text('remarks')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('modified_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-            $table->foreign('nationality_id')->references('id')->on('nationalities')->onDelete('cascade');
-            $table->foreign('job_title_id')->references('id')->on('job_titles')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('nationality_id')->references('country_code')->on('countries');
+            $table->foreign('job_title_id')->references('id')->on('job_titles');
 
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('modified_by')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('modified_by')->references('id')->on('users');
+            $table->foreign('deleted_by')->references('id')->on('users');
         });
     }
 

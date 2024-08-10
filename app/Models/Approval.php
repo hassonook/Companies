@@ -16,9 +16,9 @@ class Approval extends Model
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
-    public function country()
+    public function nationality()
     {
-        return $this->belongsTo(Country::class, 'nationality_id');
+        return $this->belongsTo(Country::class, 'nationality_id', 'country_code');
     }
     public function job_title()
     {

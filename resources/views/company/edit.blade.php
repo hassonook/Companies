@@ -112,11 +112,13 @@
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    @if($company->reg_photo != null)
                                     <div class="col-sm-3">
                                         <a href="{{ URL::asset('uploads/'.$company->company_name.'/profile/'.$company->reg_photo) }}" target="_blank">
                                             <img src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" alt="PDF Icon" height="30">
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="commercial_id" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.comId') }}</label>
@@ -153,11 +155,13 @@
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    @if($company->com_photo != null)
                                     <div class="col-sm-3">
                                         <a href="{{ URL::asset('uploads/'.$company->company_name.'/profile/'.$company->com_photo) }}" target="_blank">
                                             <img src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" alt="PDF Icon" height="30">
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="license_no" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.licNo') }}</label>
@@ -194,11 +198,13 @@
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    @if($company->lic_photo != null)
                                     <div class="col-sm-3">
                                         <a href="{{ URL::asset('uploads/'.$company->company_name.'/profile/'.$company->lic_photo) }}" target="_blank">
                                             <img src="{{ URL::asset('assets/images/file-icons/pdf.png') }}" alt="PDF Icon" height="30">
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="row mb-3">
                                     <label for="main_branch"class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('companies.mainBranch') }}</label>
@@ -258,7 +264,17 @@
                                         @enderror
                                     </div>
                                 </div>
-
+                                <div class="mb-3 row">
+                                    <label for="remarks" class="col-sm-2 form-label align-self-center mb-lg-0 text-end">{{ __('master.remarks') }}</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control mb-3 @error('remarks') parsley-error @enderror" name="remarks" id="remarks" style="width: 100%">
+                                            {{ $company->remarks }}
+                                        </textarea>
+                                        @error('remarks')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="mb-3 row">
                                     <div class="offset-sm-2 col-sm-10">
                                         <button type="submit" class="btn btn-primary">{{ __('master.submit') }}</button>

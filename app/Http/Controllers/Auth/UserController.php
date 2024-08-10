@@ -23,7 +23,7 @@ class UserController extends Controller
         $user = User::find($id);
         return view('user.details', compact('user'));
     }
-    
+
     public function add(){
         $roles = Role::get();
         return view('user.add', compact('roles'));
@@ -81,19 +81,38 @@ class UserController extends Controller
         }
     }
 
+    public function change(Request $request){
+        $request->validate([
+            'oldPassword'=> 'required',
+            'password'=>'required',
+            'confirmPassword' => 'same:password',
+        ]);
+        $credential = [
+            'email' => $request->email,
+            'password' => $request->oldPassword
+        ];
+        if(Auth::attempt($credential)){
+           $user = Auth::user();
+           $user->password = Hash::make($request->password);
+           $user->update();
+           return redirect()->back()->with('success', trans('message.passwordChanged'));
+        }else{
+            return redirect()->back()->with('error', trans('message.incorrectLogin'));
+        }
+    }
+
     public function forget_password(){
         return view('auth.forget_password');
     }
 
     public function forget_password_submit(Request $request){
-       
+
         $request->validate([
             'email'=> 'required|email',
         ]);
         $user_data = User::where('email', $request->email)->first();
-        
+
         if (!$user_data) {
-            dd('here');
             return redirect()->back()->with('error', 'Email Address not found!');
         }
 
@@ -118,7 +137,7 @@ class UserController extends Controller
     }
 
     public function reset_password_submit(Request $request){
-        
+
         $request->validate([
             'password'=> 'required',
             'repassword' => 'same:password'
